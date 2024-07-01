@@ -1,0 +1,13 @@
+<h1><%= @book.title %></h1>
+
+<p>
+  <strong>Author:</strong>
+  <%= @book.author.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @book.description %>
+</p>
+
+<%= link_to 'Back', books_path %>
