@@ -1,0 +1,18 @@
+<h1>Genres</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @genres.each do |genre| %>
+      <tr>
+        <td><%= genre.name %></td>
+        <td><%= link_to 'Show', genre %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
