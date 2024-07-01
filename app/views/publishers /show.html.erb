@@ -1,0 +1,13 @@
+<h1><%= @publisher.name %></h1>
+
+<p>
+  <strong>Location:</strong>
+  <%= @publisher.location %>
+</p>
+
+<p>
+  <strong>Books Published:</strong>
+  <%= @publisher.books.map(&:title).join(", ") %>
+</p>
+
+<%= link_to 'Back', publishers_path %>
