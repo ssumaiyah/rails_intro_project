@@ -1,2 +1,5 @@
+# app/models/author.rb
 class Author < ApplicationRecord
-end
+    has_many :books
+  end
+  
