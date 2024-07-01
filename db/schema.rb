@@ -12,9 +12,10 @@
 
 ActiveRecord::Schema[7.1].define(version: 2024_06_29_015809) do
   create_table "authors", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_authors_on_name", unique: true
   end
 
   create_table "book_genres", force: :cascade do |t|
@@ -22,6 +23,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_29_015809) do
     t.integer "genre_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["book_id", "genre_id"], name: "index_book_genres_on_book_id_and_genre_id", unique: true
     t.index ["book_id"], name: "index_book_genres_on_book_id"
     t.index ["genre_id"], name: "index_book_genres_on_genre_id"
   end
@@ -31,28 +33,32 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_29_015809) do
     t.integer "publisher_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["book_id", "publisher_id"], name: "index_book_publishers_on_book_id_and_publisher_id", unique: true
     t.index ["book_id"], name: "index_book_publishers_on_book_id"
     t.index ["publisher_id"], name: "index_book_publishers_on_publisher_id"
   end
 
   create_table "books", force: :cascade do |t|
-    t.string "title"
+    t.string "title", null: false
     t.integer "author_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_books_on_author_id"
+    t.index ["title", "author_id"], name: "index_books_on_title_and_author_id", unique: true
   end
 
   create_table "genres", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_genres_on_name", unique: true
   end
 
   create_table "publishers", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_publishers_on_name", unique: true
   end
 
   add_foreign_key "book_genres", "books"

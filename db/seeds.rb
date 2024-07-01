@@ -10,35 +10,40 @@ BookPublisher.destroy_all
 
 # Create Authors
 10.times do
-  Author.create!(name: Faker::Book.author)
-end
+    author_name = Faker::Book.author
+    Author.create_with(name: author_name).find_or_create_by!(name: author_name)
+  end
+  
 
 # Create Genres
 10.times do
-  Genre.create!(name: Faker::Book.genre)
-end
+    genre_name = Faker::Book.genre
+    Genre.create_with(name: genre_name).find_or_create_by!(name: genre_name)
+  end
+  
 
 # Create Publishers
 10.times do
-  Publisher.create!(name: Faker::Book.publisher)
-end
-
-# Create Books and associate them with Authors, Genres, and Publishers
-50.times do
-  book = Book.create!(
-    title: Faker::Book.title,
-    author: Author.all.sample
-  )
-
-  # Associate books with genres
-  genres = Genre.all.sample(rand(1..3))
-  genres.each do |genre|
-    BookGenre.create!(book: book, genre: genre)
+    publisher_name = Faker::Book.publisher
+    Publisher.create_with(name: publisher_name).find_or_create_by!(name: publisher_name)
   end
+  
+
+  50.times do
+    author = Author.all.sample
+    book = author.books.create!(
+      title: Faker::Book.title
+    )
+
+   # Associate books with genres
+   genres = Genre.all.sample(rand(1..3))
+   genres.each do |genre|
+     BookGenre.find_or_create_by!(book: book, genre: genre)
+   end
 
   # Associate books with publishers
   publishers = Publisher.all.sample(rand(1..2))
   publishers.each do |publisher|
-    BookPublisher.create!(book: book, publisher: publisher)
+    BookPublisher.find_or_create_by!(book: book, publisher: publisher)
   end
 end
