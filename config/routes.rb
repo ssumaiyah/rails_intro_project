@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'pages#index'
   get 'about', to: 'pages#about'
   resources :authors, only: [:index, :show]
   resources :books, only: [:index, :show]
