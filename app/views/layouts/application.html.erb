@@ -1,16 +1,28 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>RailsIntroProject</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>RailsApp</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_pack_tag 'application' %>
+</head>
 
-  <body>
-    <%= yield %>
-  </body>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><%= link_to 'Home', root_path %></li>
+        <li><%= link_to 'About', about_path %></li>
+        <li><%= link_to 'Authors', authors_path %></li>
+        <li><%= link_to 'Books', books_path %></li>
+        <li><%= link_to 'Genres', genres_path %></li>
+        <li><%= link_to 'Publishers', publishers_path %></li>
+      </ul>
+    </nav>
+  </header>
+
+  <%= yield %>
+</body>
 </html>
