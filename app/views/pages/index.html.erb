@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Main Page</title>
+</head>
+<body>
+  <h1>Welcome to the Main Page</h1>
+  <%= form_with(url: search_path, method: :get, local: true) do %>
+    <%= label_tag :query, "Search:" %>
+    <%= text_field_tag :query, params[:query] %>
+    <%= submit_tag "Search" %>
+  <% end %>
+
+  <div>
+    <% if @results.any? %>
+      <h2>Search Results:</h2>
+      <ul>
+        <% @results.each do |result| %>
+          <li>
+            <%= result.class.name %>:
+            <%= link_to result.name, polymorphic_path(result) %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>No search results found.</p>
+    <% end %>
+  </div>
+</body>
+</html>

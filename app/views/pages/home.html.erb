@@ -1,22 +1,13 @@
-<!-- app/views/pages/index.html.erb -->
+<!-- app/views/pages/home.html.erb -->
 <!DOCTYPE html>
 <html>
 <head>
   <title>Main Page</title>
   <%= stylesheet_link_tag 'application', media: 'all' %>
-  <%= javascript_pack_tag 'application' %>
+  <%= javascript_include_tag 'application' %>
 </head>
 <body>
-  <nav>
-    <ul>
-      <li><%= link_to 'Home', root_path %></li>
-      <li><%= link_to 'About', about_path %></li>
-      <li><%= link_to 'Authors', authors_path %></li>
-      <li><%= link_to 'Books', books_path %></li>
-      <li><%= link_to 'Genres', genres_path %></li>
-      <li><%= link_to 'Publishers', publishers_path %></li>
-    </ul>
-  </nav>
+  
 
   <h1>Welcome to the Main Page</h1>
   <%= form_with(url: search_path, method: :get, local: true) do %>

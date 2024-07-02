@@ -1,6 +1,8 @@
 # app/controllers/pages_controller.rb
 class PagesController < ApplicationController
     def index
+      @results = []
+      render 'home'
     end
   
     def about
