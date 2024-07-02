@@ -1,20 +1,15 @@
 <h1>Books</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Author</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @books.each do |book| %>
-      <tr>
-        <td><%= book.title %></td>
-        <td><%= book.author.name %></td>
-        <td><%= link_to 'Show', book %></td>
-      </tr>
+<%= link_to 'New Book', new_book_path %>
+
+<% @books.each do |book| %>
+  <div>
+    <h2><%= link_to book.title, book_path(book) %></h2>
+    <p>Author: <%= book.author.name %></p>
+    <% if book.cover_image.attached? %>
+      <%= image_tag url_for(book.cover_image) %>
     <% end %>
-  </tbody>
-</table>
+  </div>
+<% end %>
+
+<%= paginate @books %>
