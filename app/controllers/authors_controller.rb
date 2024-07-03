@@ -3,7 +3,9 @@ class AuthorsController < ApplicationController
       @authors = Author.page(params[:page])
     end
   
-    def show
-      @author = Author.find(params[:id])
+   
+      def show
+        @author = Author.includes(:books).find(params[:id])
+      end
     end
-  end
+    
