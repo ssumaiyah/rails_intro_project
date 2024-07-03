@@ -7,27 +7,37 @@ Book.destroy_all
 Author.destroy_all
 Genre.destroy_all
 Publisher.destroy_all
+Bookstore.destroy_all
 
 # Create Authors
-10.times do
+50.times do
   author_name = Faker::Book.author
   Author.create_with(name: author_name).find_or_create_by!(name: author_name)
 end
 
 # Create Genres
-10.times do
+30.times do
   genre_name = Faker::Book.genre
   Genre.create_with(name: genre_name).find_or_create_by!(name: genre_name)
 end
 
 # Create Publishers
-10.times do
+50.times do
   publisher_name = Faker::Book.publisher
   Publisher.create_with(name: publisher_name).find_or_create_by!(name: publisher_name)
 end
 
+
+100.times do
+  Bookstore.create(
+    name: "#{Faker::Company.name} Bookstore",
+    address: Faker::Address.full_address,
+    latitude: Faker::Address.latitude,
+    longitude: Faker::Address.longitude
+  )
+end
 # Create Books with associations
-50.times do
+150.times do
   author = Author.all.sample
   book = author.books.create!(
     title: Faker::Book.title

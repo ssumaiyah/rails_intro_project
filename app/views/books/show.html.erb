@@ -1,13 +1,18 @@
-<h1><%= @book.title %></h1>
+<p>
+  <strong>Title:</strong>
+  <%= @book.title %>
+</p>
 
 <p>
   <strong>Author:</strong>
   <%= @book.author.name %>
 </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @book.description %>
-</p>
+<% if @book.cover_image.attached? %>
+  <%= image_tag url_for(@book.cover_image), size: "300x300" %>
+<% else %>
+  <p>No cover image uploaded</p>
+<% end %>
 
+<%= link_to 'Edit', edit_book_path(@book) %> |
 <%= link_to 'Back', books_path %>

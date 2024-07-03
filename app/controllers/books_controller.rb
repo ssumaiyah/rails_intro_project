@@ -13,9 +13,7 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(book_params)
-    if Book.exists?(title: @book.title, author_id: @book.author_id)
-      redirect_to new_book_path, alert: 'Book with this title and author already exists.'
-    elsif @book.save
+    if @book.save
       redirect_to @book, notice: 'Book was successfully created.'
     else
       render :new
