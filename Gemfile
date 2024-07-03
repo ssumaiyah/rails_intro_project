@@ -8,6 +8,11 @@ gem "rails", "~> 7.1.3", ">= 7.1.3.4"
 gem 'faker'
 
 gem 'kaminari'
+gem 'activeadmin'
+ 
+gem 'devise'
+ 
+gem 'sassc-rails', '~> 2.1'
 
 gem 'image_processing', '~> 1.2'
 

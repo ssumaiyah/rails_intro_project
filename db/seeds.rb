@@ -55,3 +55,4 @@ end
     BookPublisher.find_or_create_by!(book: book, publisher: publisher)
   end
 end
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
