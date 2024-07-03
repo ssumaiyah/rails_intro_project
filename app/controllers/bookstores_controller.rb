@@ -3,7 +3,7 @@ class BookstoresController < ApplicationController
 
   # GET /bookstores
   def index
-    @bookstores = Bookstore.all
+    @bookstores = Bookstore.page(params[:page]).per(10)
   end
 
   # GET /bookstores/1
@@ -46,13 +46,14 @@ class BookstoresController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_bookstore
-      @bookstore = Bookstore.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def bookstore_params
-      params.require(:bookstore).permit(:name, :location, :description)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_bookstore
+    @bookstore = Bookstore.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def bookstore_params
+    params.require(:bookstore).permit(:name, :location, :description)
+  end
 end
