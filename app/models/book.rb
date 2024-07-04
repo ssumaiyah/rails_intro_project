@@ -8,6 +8,7 @@ class Book < ApplicationRecord
   has_one :publisher, through: :book_publisher
   has_many :bookstore_books
   has_many :bookstores, through: :bookstore_books
+
   # Validations
   validates :title, presence: true
   validates :author_id, presence: true

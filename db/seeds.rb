@@ -3,6 +3,7 @@ require 'faker'
 # Clear existing data
 BookGenre.destroy_all
 BookPublisher.destroy_all
+BookstoreBook.destroy_all
 Book.destroy_all
 Author.destroy_all
 Genre.destroy_all
@@ -10,49 +11,58 @@ Publisher.destroy_all
 Bookstore.destroy_all
 
 # Create Authors
-50.times do
+authors = 80.times.map do
   author_name = Faker::Book.author
-  Author.create_with(name: author_name).find_or_create_by!(name: author_name)
+  Author.find_or_create_by!(name: author_name)
 end
 
 # Create Genres
-30.times do
+genres = 50.times.map do
   genre_name = Faker::Book.genre
-  Genre.create_with(name: genre_name).find_or_create_by!(name: genre_name)
+  Genre.find_or_create_by!(name: genre_name)
 end
 
 # Create Publishers
-50.times do
+publishers = 70.times.map do
   publisher_name = Faker::Book.publisher
-  Publisher.create_with(name: publisher_name).find_or_create_by!(name: publisher_name)
+  Publisher.find_or_create_by!(name: publisher_name)
 end
 
-
-100.times do
-  Bookstore.create(
+# Create Bookstores
+bookstores = 150.times.map do
+  Bookstore.create!(
     name: "#{Faker::Company.name} Bookstore",
     address: Faker::Address.full_address,
     latitude: Faker::Address.latitude,
     longitude: Faker::Address.longitude
   )
 end
+
 # Create Books with associations
-150.times do
-  author = Author.all.sample
+200.times do
+  author = authors.sample
+  book_title = Faker::Book.unique.title
   book = author.books.create!(
-    title: Faker::Book.title
+    title: book_title
   )
 
   # Associate books with genres
-  genres = Genre.all.sample(rand(1..3))
-  genres.each do |genre|
+  genres.sample(rand(1..3)).each do |genre|
     BookGenre.find_or_create_by!(book: book, genre: genre)
   end
 
   # Associate books with publishers
-  publishers = Publisher.all.sample(rand(1..2))
-  publishers.each do |publisher|
+  publishers.sample(rand(1..2)).each do |publisher|
     BookPublisher.find_or_create_by!(book: book, publisher: publisher)
   end
+
+  # Associate books with bookstores
+  bookstores.sample(rand(1..3)).each do |bookstore|
+    BookstoreBook.find_or_create_by!(book: book, bookstore: bookstore)
+  end
 end
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+
+# Create AdminUser if it does not exist
+unless AdminUser.exists?(email: 'admin@example.com')
+  AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+end

@@ -8,6 +8,7 @@ class BookstoresController < ApplicationController
 
   # GET /bookstores/1
   def show
+    @bookstore = Bookstore.includes(:books).find(params[:id])
   end
 
   # GET /bookstores/new
@@ -17,6 +18,7 @@ class BookstoresController < ApplicationController
 
   # GET /bookstores/1/edit
   def edit
+    @bookstore = Bookstore.find(params[:id])
   end
 
   # POST /bookstores
