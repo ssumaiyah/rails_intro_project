@@ -1,2 +1,21 @@
-<h1>Bookstores#show</h1>
-<p>Find me in app/views/bookstores/show.html.erb</p>
+<!-- app/views/bookstores/show.html.erb -->
+
+<h1><%= @bookstore.name %></h1>
+
+<p><strong>Address:</strong> <%= @bookstore.address %></p>
+<p><strong>Location:</strong> Latitude: <%= @bookstore.latitude %>, Longitude: <%= @bookstore.longitude %></p>
+
+<p><strong>Description:</strong> <%= @bookstore.description %></p>
+
+<h2>Books Available:</h2>
+<% if @bookstore.books.any? %>
+  <ul>
+    <% @bookstore.books.each do |book| %>
+      <li><%= link_to book.title, book_path(book) %> by <%= book.author.name %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No books available at this bookstore.</p>
+<% end %>
+
+<%= link_to 'Edit', edit_bookstore_path(@bookstore) %> | <%= link_to 'Back', bookstores_path %>

@@ -1,21 +1,34 @@
+<!-- app/views/books/show.html.erb -->
+
 <h1><%= @book.title %></h1>
 
-<p><strong>Author:</strong> <%= @book.author.name %></p>
-<p><strong>Genres:</strong> <%= @book.genre_names %></p>
+<p><strong>Author:</strong> <%= link_to @book.author.name, author_path(@book.author) %></p>
+
+<p><strong>Genres:</strong>
+  <% @book.genres.each do |genre| %>
+    <%= link_to genre.name, genre_path(genre) %><%= ", " unless genre == @book.genres.last %>
+  <% end %>
+</p>
+
 <% if @book.cover_image.attached? %>
   <%= image_tag url_for(@book.cover_image) %>
 <% end %>
+
 <% if @book.publisher %>
-  <p><strong>Publisher:</strong> <%= @book.publisher.name %></p>
+  <p><strong>Publisher:</strong> <%= link_to @book.publisher.name, publisher_path(@book.publisher) %></p>
 <% else %>
   <p><strong>Publisher:</strong> Unknown</p>
 <% end %>
-<p><strong>Available at:</strong></p>
-<ul>
-  <% @book.bookstores.each do |store| %>
-    <li><%= store.name %></li>
-  <% end %>
-</ul>
 
-<%= link_to 'Edit', edit_book_path(@book) %> |
-<%= link_to 'Back', books_path %>
+<p><strong>Available at:</strong></p>
+<% if @book.bookstores.any? %>
+  <ul>
+    <% @book.bookstores.each do |store| %>
+      <li><%= link_to store.name, bookstore_path(store) %> - <%= store.address %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Not available at any bookstores.</p>
+<% end %>
+
+<%= link_to 'Edit', edit_book_path(@book) %> | <%= link_to 'Back', books_path %>
