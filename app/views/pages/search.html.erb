@@ -1,6 +1,18 @@
 <!-- app/views/pages/search.html.erb -->
 <h1>Search Results</h1>
 
+<!-- Hierarchical Search Form -->
+<form action="<%= search_path %>" method="get">
+  <label for="genre">Search within specific genre:</label>
+  <select id="genre" name="genre">
+    <% @genres.each do |genre| %>
+      <option value="<%= genre %>"><%= genre %></option>
+    <% end %>
+  </select>
+  <%= text_field_tag :query, params[:query], placeholder: 'Enter search query' %>
+  <%= submit_tag 'Search' %>
+</form>
+
 <% if @results.any? %>
   <ul>
     <% @results.each do |result| %>
@@ -9,6 +21,10 @@
           <%= link_to result.title, book_path(result) %>
         <% elsif result.is_a?(Author) %>
           <%= link_to result.name, author_path(result) %>
+        <% elsif result.is_a?(Genre) %>
+          <%= link_to result.name, genre_path(result) %>
+        <% elsif result.is_a?(Publisher) %>
+          <%= link_to result.name, publisher_path(result) %>
         <% else %>
           <%= "Unknown result type" %>
         <% end %>
@@ -18,3 +34,5 @@
 <% else %>
   <p>No results found.</p>
 <% end %>
+
+
