@@ -1,17 +1,21 @@
-<!-- app/views/books/show.html.erb -->
-
 <h1><%= @book.title %></h1>
 
-
-<p>
-  <strong>Author:</strong> <%= @book.author.name %>
-</p>
-
+<p><strong>Author:</strong> <%= @book.author.name %></p>
+<p><strong>Genres:</strong> <%= @book.genre_names %></p>
 <% if @book.cover_image.attached? %>
-  <div>
-    <%= image_tag @book.cover_image %>
-  </div>
+  <%= image_tag url_for(@book.cover_image) %>
 <% end %>
+<% if @book.publisher %>
+  <p><strong>Publisher:</strong> <%= @book.publisher.name %></p>
+<% else %>
+  <p><strong>Publisher:</strong> Unknown</p>
+<% end %>
+<p><strong>Available at:</strong></p>
+<ul>
+  <% @book.bookstores.each do |store| %>
+    <li><%= store.name %></li>
+  <% end %>
+</ul>
 
 <%= link_to 'Edit', edit_book_path(@book) %> |
 <%= link_to 'Back', books_path %>

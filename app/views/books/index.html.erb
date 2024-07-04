@@ -4,15 +4,15 @@
 
 <% @books.each do |book| %>
   <div>
-    
     <h2><%= link_to book.title, book_path(book) %></h2>
-<p>Author: <%= book.author.name %></p>
-<p>Genres: <%= book.genre_names %></p> <!-- Adjusted to use book.genre_names -->
-
+    <p><strong>Author:</strong> <%= book.author.name %></p>
     
+
     <% if book.cover_image.attached? %>
       <%= image_tag url_for(book.cover_image) %>
     <% end %>
+
+    
   </div>
 <% end %>
 

@@ -4,7 +4,9 @@ class Bookstore < ApplicationRecord
     validates :latitude, presence: true
     validates :longitude, presence: true
     
-    has_many :books, dependent: :destroy
+  
+    has_many :bookstore_books
+    has_many :books, through: :bookstore_books
   
     # Example of adding description attribute
     attribute :description, :text

@@ -1,13 +1,14 @@
+<!-- app/views/publishers/show.html.erb -->
+
 <h1><%= @publisher.name %></h1>
 
-<p>
-  <strong>Location:</strong>
-  <%= @publisher.location %>
-</p>
 
-<p>
-  <strong>Books Published:</strong>
-  <%= @publisher.books.map(&:title).join(", ") %>
-</p>
+
+<h2>Books by this Publisher:</h2>
+<ul>
+  <% @books.each do |book| %>
+    <li><%= link_to book.title, book_path(book) %></li>
+  <% end %>
+</ul>
 
 <%= link_to 'Back', publishers_path %>

@@ -4,9 +4,10 @@ class Book < ApplicationRecord
   belongs_to :author
   has_many :book_genres, dependent: :destroy
   has_many :genres, through: :book_genres
-  has_many :book_publishers, dependent: :destroy
-  has_many :publishers, through: :book_publishers
-
+  has_one :book_publisher, dependent: :destroy
+  has_one :publisher, through: :book_publisher
+  has_many :bookstore_books
+  has_many :bookstores, through: :bookstore_books
   # Validations
   validates :title, presence: true
   validates :author_id, presence: true
