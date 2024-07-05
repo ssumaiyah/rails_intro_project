@@ -4,14 +4,14 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Actions</th>
+      <th>Books</th>
     </tr>
   </thead>
   <tbody>
     <% @publishers.each do |publisher| %>
       <tr>
         <td><%= publisher.name %></td>
-        <td><%= link_to 'Show', publisher %></td>
+        <td><%= link_to 'Show books', publisher %></td>
       </tr>
     <% end %>
   </tbody>

@@ -4,14 +4,14 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Actions</th>
+      <th>Books</th>
     </tr>
   </thead>
   <tbody>
     <% @genres.each do |genre| %>
       <tr>
         <td><%= genre.name %></td>
-        <td><%= link_to 'Show', genre %></td>
+        <td><%= link_to 'Show books', genre %></td>
       </tr>
     <% end %>
   </tbody>

@@ -1,5 +1,143 @@
-<h1>About Us</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us</title>
+  <!-- Include Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-800">
 
-<p>
-  Welcome to our library. We have a collection of books from various authors, genres, and publishers.
-</p>
+  <div class="container mx-auto px-4 py-8">
+
+    <!-- Header -->
+    <h1 class="text-3xl font-bold mb-4">About Us</h1>
+
+    <!-- Introduction -->
+    <p class="mb-6">
+      Welcome to our library. We take pride in our extensive collection of books from various authors, genres, and publishers.
+    </p>
+
+    <!-- Database Schema and Relationships -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+      <h2 class="text-xl font-semibold mb-4">Database Schema and Relationships</h2>
+
+      <!-- Authors Table -->
+      <div class="mb-4">
+        <h3 class="text-lg font-semibold mb-2">1. Authors Table</h3>
+        <p class="text-sm mb-1">Description: This table stores information about authors of books.</p>
+        <p class="text-sm mb-1">Columns:</p>
+        <ul class="list-disc list-inside text-sm">
+          <li>id: Primary key for the author.</li>
+          <li>name: Name of the author.</li>
+          <li>created_at, updated_at: Timestamps for record creation and updates.</li>
+        </ul>
+      </div>
+
+      <!-- Genres Table -->
+      <div class="mb-4">
+        <h3 class="text-lg font-semibold mb-2">2. Genres Table</h3>
+        <p class="text-sm mb-1">Description: This table categorizes books into different genres.</p>
+        <p class="text-sm mb-1">Columns:</p>
+        <ul class="list-disc list-inside text-sm">
+          <li>id: Primary key for the genre.</li>
+          <li>name: Name of the genre.</li>
+          <li>created_at, updated_at: Timestamps for record creation and updates.</li>
+        </ul>
+      </div>
+
+      <!-- Publishers Table -->
+      <div class="mb-4">
+        <h3 class="text-lg font-semibold mb-2">3. Publishers Table</h3>
+        <p class="text-sm mb-1">Description: This table stores information about publishers of books.</p>
+        <p class="text-sm mb-1">Columns:</p>
+        <ul class="list-disc list-inside text-sm">
+          <li>id: Primary key for the publisher.</li>
+          <li>name: Name of the publisher.</li>
+          <li>created_at, updated_at: Timestamps for record creation and updates.</li>
+        </ul>
+      </div>
+
+      <!-- Books Table -->
+      <div class="mb-4">
+        <h3 class="text-lg font-semibold mb-2">4. Books Table</h3>
+        <p class="text-sm mb-1">Description: This table represents individual books.</p>
+        <p class="text-sm mb-1">Columns:</p>
+        <ul class="list-disc list-inside text-sm">
+          <li>id: Primary key for the book.</li>
+          <li>title: Title of the book.</li>
+          <li>author_id: Foreign key linking to authors table to denote the author of the book.</li>
+          <li>genre_id: Foreign key linking to genres table to denote the genre of the book.</li>
+          <li>bookstore_id: Foreign key linking to bookstores table to denote where the book is available.</li>
+          <li>created_at, updated_at: Timestamps for record creation and updates.</li>
+        </ul>
+      </div>
+
+      <!-- BookGenres Table -->
+      <div class="mb-4">
+        <h3 class="text-lg font-semibold mb-2">5. BookGenres Table</h3>
+        <p class="text-sm mb-1">Description: This join table establishes many-to-many relationships between books and genres.</p>
+        <p class="text-sm mb-1">Columns:</p>
+        <ul class="list-disc list-inside text-sm">
+          <li>book_id: Foreign key referencing books table.</li>
+          <li>genre_id: Foreign key referencing genres table.</li>
+          <li>created_at, updated_at: Timestamps for record creation and updates.</li>
+        </ul>
+      </div>
+
+      <!-- BookPublishers Table -->
+      <div class="mb-4">
+        <h3 class="text-lg font-semibold mb-2">6. BookPublishers Table</h3>
+        <p class="text-sm mb-1">Description: This join table establishes many-to-many relationships between books and publishers.</p>
+        <p class="text-sm mb-1">Columns:</p>
+        <ul class="list-disc list-inside text-sm">
+          <li>book_id: Foreign key referencing books table.</li>
+          <li>publisher_id: Foreign key referencing publishers table.</li>
+          <li>created_at, updated_at: Timestamps for record creation and updates.</li>
+        </ul>
+      </div>
+
+      <!-- Bookstores Table -->
+      <div class="mb-4">
+        <h3 class="text-lg font-semibold mb-2">7. Bookstores Table</h3>
+        <p class="text-sm mb-1">Description: This table stores information about bookstores where books are available.</p>
+        <p class="text-sm mb-1">Columns:</p>
+        <ul class="list-disc list-inside text-sm">
+          <li>id: Primary key for the bookstore.</li>
+          <li>name: Name of the bookstore.</li>
+          <li>address: Address of the bookstore.</li>
+          <li>latitude, longitude: Geographic coordinates of the bookstore.</li>
+          <li>created_at, updated_at: Timestamps for record creation and updates.</li>
+        </ul>
+      </div>
+
+      <!-- BookstoreBooks Table -->
+      <div class="mb-4">
+        <h3 class="text-lg font-semibold mb-2">8. BookstoreBooks Table</h3>
+        <p class="text-sm mb-1">Description: This join table establishes many-to-many relationships between books and bookstores.</p>
+        <p class="text-sm mb-1">Columns:</p>
+        <ul class="list-disc list-inside text-sm">
+          <li>book_id: Foreign key referencing books table.</li>
+          <li>bookstore_id: Foreign key referencing bookstores table.</li>
+          <li>created_at, updated_at: Timestamps for record creation and updates.</li>
+        </ul>
+      </div>
+
+      <!-- Relationships -->
+      <div>
+        <h2 class="text-xl font-semibold mb-2">Relationships</h2>
+        <ul class="list-disc list-inside text-sm">
+          <li>Author-Book Relationship: Each book (books table) has exactly one author (authors table).</li>
+          <li>Genre-Book Relationship: Each book (books table) can belong to multiple genres through the book_genres join table (genres table).</li>
+          <li>Publisher-Book Relationship: Each book (books table) can have multiple publishers through the book_publishers join table (publishers table).</li>
+          <li>Bookstore-Book Relationship: Each book (books table) can be available at multiple bookstores through the bookstore_books join table (bookstores table).</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
