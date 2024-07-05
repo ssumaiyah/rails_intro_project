@@ -12,7 +12,7 @@ class PagesController < ApplicationController
 
 
   def home
-    @featured_books = Book.limit(6)  # Example: Fetching 3 featured books 
+    @featured_books = Book.limit(3)  # Example: Fetching 3 featured books 
     @results = []  
   end
 
