@@ -10,8 +10,9 @@ class PagesController < ApplicationController
   end
  
 
+
   def home
-    @featured_books = Book.includes(:author, :cover_image).limit(3)  
+    @featured_books = Book.limit(6)  # Example: Fetching 3 featured books 
     @results = []  
   end
 
