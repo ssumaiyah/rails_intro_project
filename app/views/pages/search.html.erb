@@ -1,17 +1,7 @@
 <!-- app/views/pages/search.html.erb -->
 <h1>Search Results</h1>
 
-<!-- Hierarchical Search Form -->
-<form action="<%= search_path %>" method="get">
-  <label for="genre">Search within specific genre:</label>
-  <select id="genre" name="genre">
-    <% @genres.each do |genre| %>
-      <option value="<%= genre %>"><%= genre %></option>
-    <% end %>
-  </select>
-  <%= text_field_tag :query, params[:query], placeholder: 'Enter search query' %>
-  <%= submit_tag 'Search' %>
-</form>
+
 
 <% if @results.any? %>
   <ul>

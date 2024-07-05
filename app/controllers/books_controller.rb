@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  before_action :set_genres
   def index
     @books = Book.includes(:author, :genres).page(params[:page])
   end
@@ -38,4 +39,10 @@ class BooksController < ApplicationController
   def book_params
     params.require(:book).permit(:title, :author_id, :cover_image)
   end
+  private
+
+  def set_genres
+    @genres = Genre.all
+  end
+
 end

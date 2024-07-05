@@ -1,2 +1,9 @@
 class ApplicationController < ActionController::Base
-end
+    before_action :set_genres
+
+    private
+  
+    def set_genres
+      @genres = Genre.all
+    end
+  end

@@ -4,27 +4,46 @@
   <title>RailsApp</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
-
+  
+  <!-- Include Tailwind CSS and custom fonts -->
+  <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+  
+  <!-- Include your application-wide styles -->
   <%= stylesheet_link_tag 'application', media: 'all' %>
+  
+  <!-- Include JavaScript -->
   <%= javascript_include_tag 'application' %>
 </head>
 
 <body>
   <header>
-    <nav>
-      <ul>
-        <li><%= link_to 'Home', root_path %></li>
-        <li><%= link_to 'About', about_path %></li>
-        <li><%= link_to 'Authors', authors_path %></li>
-        <li><%= link_to 'Books', books_path %></li>
-        <li><%= link_to 'Genres', genres_path %></li>
-        <li><%= link_to 'Publishers', publishers_path %></li>
-        <li><%= link_to 'Bookstores', bookstores_path %></li>
-
+    <nav class="bg-gray-800 text-white p-4">
+      <ul class="flex space-x-4">
+        <li><%= link_to 'Home', root_path, class: "hover:text-gray-300" %></li>
+        <li><%= link_to 'About', about_path, class: "hover:text-gray-300" %></li>
+        <li><%= link_to 'Authors', authors_path, class: "hover:text-gray-300" %></li>
+        <li><%= link_to 'Books', books_path, class: "hover:text-gray-300" %></li>
+        <li><%= link_to 'Genres', genres_path, class: "hover:text-gray-300" %></li>
+        <li><%= link_to 'Publishers', publishers_path, class: "hover:text-gray-300" %></li>
+        <li><%= link_to 'Bookstores', bookstores_path, class: "hover:text-gray-300" %></li>
       </ul>
+      
+      <!-- Hierarchical Search Form -->
+      <form action="<%= search_path %>" method="get" class="flex items-center mt-4 md:mt-0 md:ml-4">
+        <label for="genre" class="text-white mr-2">Search within specific genre:</label>
+        <select id="genre" name="genre" class="mr-2 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-black">
+          <% @genres.each do |genre| %>
+            <option value="<%= genre.id %>" class="text-black"><%= genre.name %></option>
+          <% end %>
+        </select>
+        <%= text_field_tag :query, params[:query], class: 'px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-black', placeholder: 'Enter search query' %>
+        <%= submit_tag 'Search', class: 'ml-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none' %>
+      </form>
     </nav>
   </header>
 
-  <%= yield %>
+  <main class="prose container mx-auto px-5">
+    <%= yield %>
+  </main>
 </body>
 </html>
