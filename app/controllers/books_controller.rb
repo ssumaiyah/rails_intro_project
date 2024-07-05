@@ -2,6 +2,9 @@ class BooksController < ApplicationController
   before_action :set_genres
   def index
     @books = Book.includes(:author, :genres).page(params[:page])
+    
+      @genres = Genre.all
+    
   end
   
   def edit

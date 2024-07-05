@@ -1,26 +1,24 @@
-# app/controllers/pages_controller.rb
 class PagesController < ApplicationController
+  before_action :set_genres, only: [:index, :home, :search, :about]
+
   def index
-    @genres = Genre.pluck(:name).prepend('All')
-    @results = []  # Initialize @results if needed
+    @results = [] 
     render 'home'
   end
 
   def about
   end
+ 
 
   def home
-    @genres = Genre.pluck(:name).prepend('All')
-    @results = []  # Initialize @results if needed
+    @featured_books = Book.includes(:author, :cover_image).limit(3)  
+    @results = []  
   end
 
   def search
     @query = params[:query]
     @genre = params[:genre]
     @results = []
-
-    # Ensure @genres is initialized here
-    @genres = Genre.pluck(:name).prepend('All')
 
     case @genre
     when 'All'
@@ -36,5 +34,11 @@ class PagesController < ApplicationController
     end
 
     render 'search'
+  end
+
+  private
+
+  def set_genres
+    @genres = Genre.all
   end
 end

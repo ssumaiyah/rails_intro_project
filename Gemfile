@@ -10,6 +10,8 @@ gem 'faker'
 gem 'kaminari'
 gem 'activeadmin'
  
+gem 'mini_magick', '~> 4.11'
+
 gem 'devise'
  
 gem 'sassc-rails', '~> 2.1'
