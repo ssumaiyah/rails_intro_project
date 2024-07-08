@@ -6,7 +6,20 @@ class BooksController < ApplicationController
       @genres = Genre.all
     
   end
-  
+  def search
+    @books = Book.all
+
+    if params[:search].present?
+      @books = @books.where("title LIKE ?", "%#{params[:search]}%")
+    end
+
+    if params[:genre].present?
+      @books = @books.where(genre_id: params[:genre])
+    end
+
+    render 'pages/search'
+  end
+
   def edit
     @book = Book.find(params[:id])
   end

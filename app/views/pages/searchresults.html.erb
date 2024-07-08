@@ -1,0 +1,16 @@
+<!-- app/views/pages/searchresults.html.erb -->
+<div class="container mx-auto py-6">
+  <h1 class="text-2xl font-semibold mb-4">Search Results</h1>
+
+  <% if @books.any? %>
+    <ul class="space-y-2">
+      <% @books.each do |book| %>
+        <li class="p-4 bg-white rounded-md shadow">
+          <strong><%= book.title %></strong> - <%= book.genre_names %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p class="text-gray-700">No results found.</p>
+  <% end %>
+</div>

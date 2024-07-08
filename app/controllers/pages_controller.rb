@@ -8,8 +8,6 @@ class PagesController < ApplicationController
 
   def about
   end
- 
-
 
   def home
     @featured_books = Book.limit(3)  # Example: Fetching 3 featured books 
@@ -17,24 +15,17 @@ class PagesController < ApplicationController
   end
 
   def search
-    @query = params[:query]
-    @genre = params[:genre]
-    @results = []
+    @books = Book.includes(:genres)
 
-    case @genre
-    when 'All'
-      @results = Book.where('title LIKE ?', "%#{@query}%")
-    when 'Author'
-      @results = Author.where('name LIKE ?', "%#{@query}%")
-    when 'Genre'
-      @results = Genre.where('name LIKE ?', "%#{@query}%")
-    when 'Publisher'
-      @results = Publisher.where('name LIKE ?', "%#{@query}%")
-    else
-      @results = Book.joins(:genres).where('books.title LIKE ? AND genres.name = ?', "%#{@query}%", @genre)
+    if params[:search].present?
+      @books = @books.where("title LIKE ?", "%#{params[:search]}%")
     end
 
-    render 'search'
+    if params[:genre].present?
+      @books = @books.where(genres: { id: params[:genre] })
+    end
+
+    render 'pages/searchresults'
   end
 
   private
