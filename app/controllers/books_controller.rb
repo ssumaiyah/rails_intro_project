@@ -47,5 +47,13 @@ class BooksController < ApplicationController
   def set_genres
     @genres = Genre.all
   end
-
+  def search
+    @genres = Genre.all
+    if params[:query].present?
+      @results = Book.includes(:author, :genres).where("title LIKE ?", "%#{params[:query]}%")
+      @results = @results.where(genre_id: params[:genre_id]) if params[:genre_id].present?
+    else
+      @results = []
+    end
+  end
 end

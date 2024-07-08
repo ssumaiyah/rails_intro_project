@@ -1,19 +1,18 @@
 <!-- app/views/pages/search.html.erb -->
 <h1>Search Results</h1>
 
-
-
 <% if @results.any? %>
   <ul>
     <% @results.each do |result| %>
       <li>
-        <% if result.is_a?(Book) %>
+        <% case result.class.name %>
+        <% when "Book" %>
           <%= link_to result.title, book_path(result) %>
-        <% elsif result.is_a?(Author) %>
+        <% when "Author" %>
           <%= link_to result.name, author_path(result) %>
-        <% elsif result.is_a?(Genre) %>
+        <% when "Genre" %>
           <%= link_to result.name, genre_path(result) %>
-        <% elsif result.is_a?(Publisher) %>
+        <% when "Publisher" %>
           <%= link_to result.name, publisher_path(result) %>
         <% else %>
           <%= "Unknown result type" %>
@@ -24,5 +23,3 @@
 <% else %>
   <p>No results found.</p>
 <% end %>
-
-
