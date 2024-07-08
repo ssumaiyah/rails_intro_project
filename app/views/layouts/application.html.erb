@@ -13,43 +13,34 @@
   <%= javascript_include_tag 'application' %>
 </head>
 
-<body>
- 
-    <nav class="bg-gray-800 text-white p-4">
-      <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-        <div class="relative flex items-center justify-between h-16">
-          <ul class="flex space-x-4">
-            <li><%= link_to 'Home', root_path, class: "hover:text-gray-300" %></li>
-            <li><%= link_to 'Authors', authors_path, class: "hover:text-gray-300" %></li>
-            <li><%= link_to 'Books', books_path, class: "hover:text-gray-300" %></li>
-            <li><%= link_to 'Genres', genres_path, class: "hover:text-gray-300" %></li>
-            <li><%= link_to 'Publishers', publishers_path, class: "hover:text-gray-300" %></li>
-            <li><%= link_to 'Bookstores', bookstores_path, class: "hover:text-gray-300" %></li>
-            <li><%= link_to 'About', about_path, class: "hover:text-gray-300" %></li>
-          </ul>
-          
-          <!-- Search and Genre Dropdown Form -->
-          <%= form_with(url: search_path, method: :get, local: true, class: "flex space-x-2") do %>
-            <div>
-              <%= label_tag :search, "Search:", class: "block text-sm font-medium text-gray-700" %>
-              <%= text_field_tag :search, params[:search], class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-black" %>
-            </div>
-
-            <div>
-              <%= label_tag :genre, "Genre:", class: "block text-sm font-medium text-gray-700" %>
-              <%= select_tag :genre, options_for_select([['All Genres', ''], options_from_collection_for_select(@genres, :id, :name, params[:genre])]), class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-black" %>
-            </div>
-
-            <div class="flex items-end">
-              <%= submit_tag "Search", class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
-            </div>
+<body class="bg-gray-100 h-screen">
+  <nav class="bg-gray-800 text-white py-4">
+    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+      <div class="relative flex items-center justify-between h-16">
+        <div class="flex-1">
+          <%= link_to 'Home', root_path, class: "text-lg hover:text-gray-300 transition duration-300 ease-in-out hover:bg-gray-700 hover:rounded-md py-1 px-0.5 mr-1" %>
+          <%= link_to 'Authors', authors_path, class: "text-lg hover:text-gray-300 transition duration-300 ease-in-out hover:bg-gray-700 hover:rounded-md py-1 px-0.5 mr-1" %>
+          <%= link_to 'Books', books_path, class: "text-lg hover:text-gray-300 transition duration-300 ease-in-out hover:bg-gray-700 hover:rounded-md py-1 px-0.5 mr-1" %>
+          <%= link_to 'Genres', genres_path, class: "text-lg hover:text-gray-300 transition duration-300 ease-in-out hover:bg-gray-700 hover:rounded-md py-1 px-0.5 mr-1" %>
+          <%= link_to 'Publishers', publishers_path, class: "text-lg hover:text-gray-300 transition duration-300 ease-in-out hover:bg-gray-700 hover:rounded-md py-1 px-0.5 mr-1" %>
+          <%= link_to 'Bookstores', bookstores_path, class: "text-lg hover:text-gray-300 transition duration-300 ease-in-out hover:bg-gray-700 hover:rounded-md py-1 px-0.5 mr-1" %>
+          <%= link_to 'About', about_path, class: "text-lg hover:text-gray-300 transition duration-300 ease-in-out hover:bg-gray-700 hover:rounded-md py-1 px-0.5 mr-1" %>
+        </div>
+        <div class="flex items-center space-x-2">
+          <%= form_with(url: search_path, method: :get, local: true, class: "flex items-center space-x-2") do %>
+            <%= text_field_tag :search, params[:search], class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-black" %>
+            <%= select_tag :genre, options_for_select([['All Genres', ''], options_from_collection_for_select(@genres, :id, :name, params[:genre])]), class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-black" %>
+            <%= submit_tag "Search", class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
           <% end %>
         </div>
       </div>
-    </nav>
+    </div>
+  </nav>
 
   <div class="container mx-auto py-6">
     <%= yield %>
   </div>
+
+  
 </body>
 </html>
