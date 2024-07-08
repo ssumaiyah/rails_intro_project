@@ -1,3 +1,4 @@
+<!-- app/views/layouts/application.html.erb -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,43 +7,46 @@
   <%= csp_meta_tag %>
   
   <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+
   <%= stylesheet_link_tag 'application', media: 'all' %>
+
   <%= javascript_include_tag 'application' %>
 </head>
 
 <body>
-  <nav class="bg-gray-800 text-white p-4">
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-      <div class="relative flex items-center justify-between h-16">
-        <ul class="flex space-x-4">
-          <li><%= link_to 'Home', root_path, class: "hover:text-gray-300" %></li>
-          <li><%= link_to 'Authors', authors_path, class: "hover:text-gray-300" %></li>
-          <li><%= link_to 'Books', books_path, class: "hover:text-gray-300" %></li>
-          <li><%= link_to 'Genres', genres_path, class: "hover:text-gray-300" %></li>
-          <li><%= link_to 'Publishers', publishers_path, class: "hover:text-gray-300" %></li>
-          <li><%= link_to 'Bookstores', bookstores_path, class: "hover:text-gray-300" %></li>
-          <li><%= link_to 'About', about_path, class: "hover:text-gray-300" %></li>
-        </ul>
+ 
+    <nav class="bg-gray-800 text-white p-4">
+      <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+        <div class="relative flex items-center justify-between h-16">
+          <ul class="flex space-x-4">
+            <li><%= link_to 'Home', root_path, class: "hover:text-gray-300" %></li>
+            <li><%= link_to 'Authors', authors_path, class: "hover:text-gray-300" %></li>
+            <li><%= link_to 'Books', books_path, class: "hover:text-gray-300" %></li>
+            <li><%= link_to 'Genres', genres_path, class: "hover:text-gray-300" %></li>
+            <li><%= link_to 'Publishers', publishers_path, class: "hover:text-gray-300" %></li>
+            <li><%= link_to 'Bookstores', bookstores_path, class: "hover:text-gray-300" %></li>
+            <li><%= link_to 'About', about_path, class: "hover:text-gray-300" %></li>
+          </ul>
+          
+          <!-- Search and Genre Dropdown Form -->
+          <%= form_with(url: search_path, method: :get, local: true, class: "flex space-x-2") do %>
+            <div>
+              <%= label_tag :search, "Search:", class: "block text-sm font-medium text-gray-700" %>
+              <%= text_field_tag :search, params[:search], class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-black" %>
+            </div>
 
-        <!-- Search and Genre Dropdown Form -->
-        <%= form_with(url: search_path, method: :get, local: true, class: "flex space-x-2") do %>
-          <div>
-            <%= label_tag :search, "Search:", class: "block text-sm font-medium text-gray-700" %>
-            <%= text_field_tag :search, params[:search], class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-black" %>
-          </div>
+            <div>
+              <%= label_tag :genre, "Genre:", class: "block text-sm font-medium text-gray-700" %>
+              <%= select_tag :genre, options_for_select([['All Genres', ''], options_from_collection_for_select(@genres, :id, :name, params[:genre])]), class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-black" %>
+            </div>
 
-          <div>
-            <%= label_tag :genre, "Genre:", class: "block text-sm font-medium text-gray-700" %>
-            <%= select_tag :genre, options_for_select(Genre.all.pluck(:name, :id), params[:genre]), class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-black" %>
-          </div>
-
-          <div class="flex items-end">
-            <%= submit_tag "Search", class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
-          </div>
-        <% end %>
+            <div class="flex items-end">
+              <%= submit_tag "Search", class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+            </div>
+          <% end %>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
 
   <div class="container mx-auto py-6">
     <%= yield %>
