@@ -9,6 +9,9 @@ gem 'faker'
 
 gem 'kaminari'
 gem 'activeadmin'
+
+gem 'ransack'
+
  
 gem 'mini_magick', '~> 4.11'
 

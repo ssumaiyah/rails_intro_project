@@ -1,4 +1,8 @@
 class Bookstore < ApplicationRecord
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["id","name","address","created_at","updated_at","description"]  # Adjust this based on your actual associations
+  end
     validates :name, presence: true
     validates :address, presence: true
     validates :latitude, presence: true
@@ -10,5 +14,13 @@ class Bookstore < ApplicationRecord
   
     # Example of adding description attribute
     attribute :description, :text
-  end
+
+    def self.ransackable_associations(auth_object = nil)
+      ["books"]
+    end
+ 
+  
+end
+
+
   

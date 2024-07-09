@@ -1,5 +1,9 @@
 ActiveAdmin.register AdminUser do
-  permit_params :email, :password, :password_confirmation
+  permit_params :email, :password, :password_confirmation, :cover_image
+
+  filter :bookstore_books_id
+ filter :cover_image
+ filter :book_genres_id
 
   index do
     selectable_column
